@@ -370,6 +370,9 @@ h4 {
 .main-slider-btn img {
   width: 100%;
 }
+.status {
+  text-align: center;
+}
 .main-prev-btn {
   left: 0;
 }
