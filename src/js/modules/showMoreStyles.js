@@ -12,17 +12,29 @@ const showMoreStyles = (trigger, wrapper) => {
     //         card.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
     //         card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
     //     });
-    //     // btn.style.display = 'none';
     //     btn.remove();
     // });
+
+
 
     btn.addEventListener('click', function() {
         getResource('assets/db.json')
             .then(res => createCards(res.styles))
-            .catch(error => console.log(error));
+            .catch(error => {
+				console.log(error);
+				errorReport();
+			})
+			.finally(this.remove());
+	});
 
-        this.remove();
-    });
+	function errorReport() {
+		let report = document.createElement('div');
+
+		report.textContent = 'Что-то пошло не так, попробуйте позднее';
+		report.style.textAlign = 'center';
+
+		document.querySelector(wrapper).appendChild(report);
+	}
 
     function createCards(response) {
         response.forEach(({src, title, link}) => {
